@@ -22,6 +22,8 @@ export default function QuizModal({ page }: { page: number }) {
     (state) => state.modal.participateQuizModal.isOpen
   );
 
+  console.log(page)
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string[]>>({});
   const [timeLeft, setTimeLeft] = useState(0);

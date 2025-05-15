@@ -2,6 +2,7 @@ import React from 'react';
 import { Smile, Reply, Pencil, Trash2 } from 'lucide-react';
 import SingleQuiz from '../RoomQuizzes/SingleQuiz';
 import ChatInputs from './ChatInputs';
+import Image from 'next/image';
 
 const messages = [
   { id: 1, sender: 'user', name: 'You', text: 'Hey! How are you doing?', reactions: [{ emoji: '👍', users: ['Alex', 'John'] }, { emoji: '❤️', users: ['You'] }, { emoji: '😂', users: ['Sam', 'Emma'] }] },
@@ -90,14 +91,14 @@ export default function Chat() {
                 {/* Image Message */}
                 {msg.imageUrl && (
                   <div className="mt-2">
-                    <img src={msg.imageUrl} alt="uploaded" className="w-36 h-36 object-cover rounded-md" />
+                    <Image src={msg.imageUrl} alt="uploaded" className="w-36 h-36 object-cover rounded-md" />
                   </div>
                 )}
 
                 {/* GIF Message */}
                 {msg.gifUrl && (
                   <div className="mt-2">
-                    <img src={msg.gifUrl} alt="gif" className="w-36 h-36 object-cover rounded-md" />
+                    <Image src={msg.gifUrl} alt="gif" className="w-36 h-36 object-cover rounded-md" />
                   </div>
                 )}
 

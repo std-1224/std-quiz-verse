@@ -1,28 +1,41 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import {
-  Mic, MicOff, Video, VideoOff, PhoneOff, MessageCircle,
-  Users, Share2, LayoutGrid,
-  Hand
-} from 'lucide-react';
-import ControlButton from './ControlButton';
+  Mic,
+  MicOff,
+  Video,
+  VideoOff,
+  PhoneOff,
+  Share2,
+  Hand,
+} from "lucide-react";
+import ControlButton from "./ControlButton";
 
 export default function ControlsBar({
   setLayout,
   showChat,
   setShowChat,
   showParticipants,
-  setShowParticipants
+  setShowParticipants,
 }: {
-  setLayout: (layout: 'grid' | 'spotlight') => void;
+  setLayout: (layout: "grid" | "spotlight") => void;
   showChat: boolean;
   setShowChat: (show: boolean) => void;
   showParticipants: boolean;
   setShowParticipants: (show: boolean) => void;
 }) {
+  console.log(
+    setLayout,
+    showChat,
+    setShowChat,
+    showParticipants,
+    setShowParticipants
+  );
   const [isMuted, setIsMuted] = useState(false);
   const [isVideoOff, setIsVideoOff] = useState(false);
   const [isHandRaised, setIsHandRaised] = useState(false);
-  const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
+  const [currentTime, setCurrentTime] = useState(
+    new Date().toLocaleTimeString()
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -44,30 +57,23 @@ export default function ControlsBar({
           icon={isMuted ? MicOff : Mic}
           active={!isMuted}
           onClick={() => setIsMuted(!isMuted)}
-          label='Mute/Unmute'
+          label="Mute/Unmute"
         />
         <ControlButton
           icon={isVideoOff ? VideoOff : Video}
           active={!isVideoOff}
           onClick={() => setIsVideoOff(!isVideoOff)}
-          label='Video On/Off'
+          label="Video On/Off"
         />
         <ControlButton
           icon={Hand}
           active={isHandRaised}
           onClick={() => setIsHandRaised(!isHandRaised)}
-          label='Raise Hand'
+          label="Raise Hand"
         />
-        <ControlButton
-          icon={Share2}
-          label='Share Screen'
-        />
-        <ControlButton
-          icon={PhoneOff}
-          danger
-          label='Leave Room'
-        />
+        <ControlButton icon={Share2} label="Share Screen" />
+        <ControlButton icon={PhoneOff} danger label="Leave Room" />
       </div>
     </div>
-  )
+  );
 }

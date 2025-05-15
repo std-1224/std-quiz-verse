@@ -25,7 +25,7 @@ export default function Home() {
 
             <div className="lg:col-span-1">
               <SideMenu />
-              <TopParticipants />
+              <TopParticipants categories={[]}/>
             </div>
           </div>
         </div>

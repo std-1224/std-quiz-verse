@@ -3,6 +3,7 @@ import Modal from '../common/Modal';
 import { Users, Globe2, Crown, DoorOpen, X } from 'lucide-react';
 import { RoomType } from '@/types/room';
 import Link from 'next/link';
+import Image from 'next/image';
 // import { VideoConference } from './VideoConference';
 
 // Mock data - replace with real data fetching
@@ -108,8 +109,8 @@ export default function RoomDetailsModal({ isOpen, handler }: RoomDetailsModalPr
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {room.members.map((member) => (
                   <div key={member.id} className="flex items-center gap-4 p-4 bg-gray-800/50 rounded-lg">
-                    <img
-                      src={member.avatar}
+                    <Image
+                      src={member.avatar || ""}
                       alt={member.name}
                       className="w-12 h-12 rounded-full"
                     />

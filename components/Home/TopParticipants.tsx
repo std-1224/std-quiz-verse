@@ -12,8 +12,17 @@ import { TopParticipantsTypes } from "@/types/leaderboard";
 import Error from "../common/Error";
 import { AnimatePresence, motion } from "framer-motion";
 
-export default function TopParticipants() {
-  const { data: initialParticipants, isLoading, isError } = useGetTopParticipantsQuery();
+export default function TopParticipants({
+  categories,
+}: {
+  categories: unknown;
+}) {
+  console.log(categories)
+  const {
+    data: initialParticipants,
+    isLoading,
+    isError,
+  } = useGetTopParticipantsQuery();
   const [participants, setParticipants] = useState<TopParticipantsTypes[]>([]);
   const socket = useSocket();
 
@@ -27,13 +36,13 @@ export default function TopParticipants() {
     if (socket) {
       socket.on("topParticipants", (updatedParticipants) => {
         console.log("Top participants updated:", updatedParticipants);
-  
+
         setParticipants((prevParticipants) => {
           // If lengths are different, update immediately
           if (prevParticipants.length !== updatedParticipants.length) {
             return updatedParticipants;
           }
-  
+
           // Compare previous and updated participants in both order and values
           const isSameData = prevParticipants.every(
             (prev, index) =>
@@ -41,26 +50,28 @@ export default function TopParticipants() {
               prev.totalMarks === updatedParticipants[index]?.totalMarks &&
               prev.rank === updatedParticipants[index]?.rank
           );
-  
+
           // Update state only if something has changed
           return isSameData ? prevParticipants : updatedParticipants;
         });
       });
     }
-  
+
     return () => {
       if (socket) socket.off("topParticipants");
     };
   }, [socket]);
-  
-  
 
   const getBadgeColor = (rank: number) => {
     switch (rank) {
-      case 1: return "bg-yellow-500/10 text-yellow-500 border-yellow-500/20";
-      case 2: return "bg-gray-300/10 text-gray-300 border-gray-300/20";
-      case 3: return "bg-amber-600/10 text-amber-600 border-amber-600/20";
-      default: return "bg-blue-500/10 text-blue-500 border-blue-500/20";
+      case 1:
+        return "bg-yellow-500/10 text-yellow-500 border-yellow-500/20";
+      case 2:
+        return "bg-gray-300/10 text-gray-300 border-gray-300/20";
+      case 3:
+        return "bg-amber-600/10 text-amber-600 border-amber-600/20";
+      default:
+        return "bg-blue-500/10 text-blue-500 border-blue-500/20";
     }
   };
 
@@ -83,7 +94,9 @@ export default function TopParticipants() {
       <motion.div className="space-y-4">
         <AnimatePresence>
           {participants.map((participant, index) => {
-            const avatarSvg = participant.avatar || generateIdenticonAvatar(participant.name, 40);
+            const avatarSvg =
+              participant.avatar ||
+              generateIdenticonAvatar(participant.name, 40);
 
             return (
               <motion.div
@@ -120,7 +133,9 @@ export default function TopParticipants() {
                       />
                     )}
                     <div className="w-36">
-                      <p className="text-white font-medium">{participant.name}</p>
+                      <p className="text-white font-medium">
+                        {participant.name}
+                      </p>
                       <span
                         className={cn(
                           "text-xs px-2 py-0.5 rounded-full border inline-block mt-1",
@@ -135,7 +150,9 @@ export default function TopParticipants() {
                     <p className="text-green-500 font-bold text-base">
                       {participant.totalMarks} /=
                     </p>
-                    <p className="text-xs text-gray-400">Rank #{participant.rank}</p>
+                    <p className="text-xs text-gray-400">
+                      Rank #{participant.rank}
+                    </p>
                   </div>
                 </div>
               </motion.div>

@@ -20,8 +20,10 @@ export const resultApiSlice = apiSlice.injectEndpoints({
       // invalidatesTags: ["Quizzes", "UserQuizzes"],
       async onQueryStarted(arg, { dispatch, queryFulfilled, getState }) {
         try {
-          const { data: createdResult } = await queryFulfilled;
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const { data: createdResult } : any = await queryFulfilled;
 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const state: any = getState();
 
           const quizzesQueries = quizApiSlice.util.selectInvalidatedBy(state, [
@@ -40,8 +42,10 @@ export const resultApiSlice = apiSlice.injectEndpoints({
               quizApiSlice.util.updateQueryData(
                 "getQuizzes",
                 originalArgs,
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 (draft: any) => {
                   const quiz = draft?.data?.find(
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     (q: any) => q._id === createdResult?.data?.quiz
                   );
                   if (quiz) {
@@ -61,8 +65,10 @@ export const resultApiSlice = apiSlice.injectEndpoints({
               quizApiSlice.util.updateQueryData(
                 "getUserQuizzes",
                 originalArgs,
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 (draft: any) => {
                   const quiz = draft?.data?.find(
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     (q: any) => q._id === createdResult?.data?.quiz
                   );
                   if (quiz) {

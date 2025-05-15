@@ -69,7 +69,7 @@ export default function SearchQuizList() {
       });
       if (node) observer.current.observe(node);
     },
-    [page, quizzes]
+    [page, quizzes, isValidResponse]
   );
 
   // Render Quiz Cards
@@ -96,7 +96,7 @@ export default function SearchQuizList() {
           {isError && <Error msg="Error fetching quizzes" />}
         </div>
       </div>
-      <ParticipantsQuizModal />
+      <ParticipantsQuizModal page={page}/>
     </>
   );
 }

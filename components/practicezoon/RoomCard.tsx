@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import { Users, Globe2, Expand } from 'lucide-react';
 import { RoomType } from '@/types/room';
+import Image from 'next/image';
 
 interface RoomCardProps {
   room: RoomType;
@@ -44,10 +45,10 @@ export const RoomCard = forwardRef<HTMLDivElement, RoomCardProps>(({ room, handl
       <div className="flex items-center justify-between">
         <div className="flex -space-x-2">
           {room.members.slice(0, 4).map((member) => (
-            <img
+            <Image
               key={member.id}
               className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-800"
-              src={member.avatar}
+              src={member.avatar || ""}
               alt={member.name}
               title={member.name}
             />
